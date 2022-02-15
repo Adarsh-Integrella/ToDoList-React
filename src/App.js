@@ -1,23 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Header from "./components/Header";
+import Form from "./components/Form";
+import { useState } from "react";
+import Displaylist from "./components/Displaylist";
 
 function App() {
+  //used to add single items
+  const [input, setInput] = useState("");
+
+  //This will fetch data on load from local storage
+  const [todoList, setTodoList] = useState(() => {
+    const savedTodos = localStorage.getItem("ToDoList");
+    if (savedTodos) {
+      return JSON.parse(savedTodos);
+    } else {
+      return [];
+    }
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container card " style={{ width: "25rem" }}>
+      <div className="card-body ">
+        <Header />
+        <Form
+          input={input}
+          setInput={setInput}
+          todoList={todoList}
+          setTodoList={setTodoList}
+        />
+        <Displaylist todoList={todoList} setTodoList={setTodoList} />
+      </div>
     </div>
   );
 }

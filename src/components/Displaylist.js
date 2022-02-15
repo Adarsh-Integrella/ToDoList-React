@@ -1,6 +1,6 @@
 import React from "react";
 
-function Displaylist({ setTodoList, todoList }) {
+function Displaylist({ setTodoList, todoList, useShowListText }) {
   const deleteItem = (key) => {
     const newList = todoList.filter((item) => {
       return item.key !== key;
